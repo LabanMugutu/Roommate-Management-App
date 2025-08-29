@@ -1,4 +1,3 @@
-// Pages/GroceryPage.jsx
 import React, { useState } from "react";
 import { useGroceryStore } from "../Stores/useGroceryStore";
 import Card from "../Components/Card";
