@@ -1,4 +1,3 @@
-
 import { useBills } from "../context/BillsProvider";
 
 export default function BalanceSummary() {
@@ -7,7 +6,7 @@ export default function BalanceSummary() {
     <div>
       <h2>Balances</h2>
       <ul>
-        {roommates.map(r => {
+        {roommates.map((r) => {
           const b = balances[r.id] ?? 0;
           const label = b > 0 ? `should receive` : b < 0 ? `owes` : `settled`;
           return (

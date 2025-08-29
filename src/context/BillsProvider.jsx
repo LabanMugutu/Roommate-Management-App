@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useMemo, useReducer } from "react";
 
 const BillsContext = createContext();
@@ -9,20 +8,18 @@ const initialState = {
     { id: "r2", name: "Bob" },
     { id: "r3", name: "Charlie" },
   ],
-  expenses: [], 
+  expenses: [],
 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case "ADD_EXPENSE": {
+    case "ADD_EXPENSE":
       return { ...state, expenses: [action.payload, ...state.expenses] };
-    }
-    case "REMOVE_EXPENSE": {
+    case "REMOVE_EXPENSE":
       return {
         ...state,
         expenses: state.expenses.filter((e) => e.id !== action.payload),
       };
-    }
     default:
       return state;
   }

@@ -1,4 +1,3 @@
-
 import { useBills } from "../context/BillsProvider";
 
 function ExpenseItem({ e, onRemove, payerName }) {
@@ -12,13 +11,13 @@ function ExpenseItem({ e, onRemove, payerName }) {
 
 export default function ExpenseList() {
   const { expenses, roommates, removeExpense } = useBills();
-  const nameOf = (id) => roommates.find(r => r.id === id)?.name ?? "Unknown";
+  const nameOf = (id) => roommates.find((r) => r.id === id)?.name ?? "Unknown";
 
   if (expenses.length === 0) return <p>No expenses yet.</p>;
 
   return (
     <ul>
-      {expenses.map(e => (
+      {expenses.map((e) => (
         <ExpenseItem
           key={e.id}
           e={e}

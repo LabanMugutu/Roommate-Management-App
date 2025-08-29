@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useBills } from "../context/BillsProvider";
 
@@ -24,15 +23,17 @@ export default function AddExpenseForm() {
       notes: notes.trim() || undefined,
     });
 
-    setTitle(""); setAmount(""); setNotes("");
+    setTitle("");
+    setAmount("");
+    setNotes("");
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form">
+    <form onSubmit={handleSubmit}>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Expense title (e.g., Electricity)"
+        placeholder="Expense title"
       />
       <input
         type="number"
@@ -44,7 +45,11 @@ export default function AddExpenseForm() {
         placeholder="Amount"
       />
       <select value={paidBy} onChange={(e) => setPaidBy(e.target.value)}>
-        {roommates.map(r => <option key={r.id} value={r.id}>{r.name}</option>)}
+        {roommates.map((r) => (
+          <option key={r.id} value={r.id}>
+            {r.name}
+          </option>
+        ))}
       </select>
       <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       <input
