@@ -1,0 +1,265 @@
+{
+  "roommates": [
+    {
+      "id": "1",
+      "name": "Beatrice Wambui",
+      "email": "bea@example.com",
+      "avatar": "https://example.com/avatars/bea.png"
+    },
+    {
+      "id": "2",
+      "name": "Praxcedes Kabeya",
+      "email": "prax@example.com",
+      "avatar": "https://example.com/avatars/prax.png"
+    },
+    {
+      "id": "3",
+      "name": "Laban Mugutu",
+      "email": "laban@example.com",
+      "avatar": "https://example.com/avatars/laban.png"
+    },
+    {
+      "id": "4",
+      "name": "Victorious Ngaruiya",
+      "email": "vic@example.com",
+      "avatar": "https://example.com/avatars/vic.png"
+    }
+  ],
+  "bills": [
+    {
+      "id": "201",
+      "title": "Electricity Bill",
+      "amount": 3000,
+      "currency": "KES",
+      "splitType": "percentage",
+      "splits": [
+        { "userId": "1", "share": 50 },
+        { "userId": "2", "share": 50 }
+      ],
+      "dueDate": "2025-08-30T23:59:00Z",
+      "status": "unpaid",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "202",
+      "title": "Internet Bill",
+      "amount": 5000,
+      "currency": "KES",
+      "splitType": "even",
+      "splits": [
+        { "userId": "1", "share": 25 },
+        { "userId": "2", "share": 25 },
+        { "userId": "3", "share": 25 },
+        { "userId": "4", "share": 25 }
+      ],
+      "dueDate": "2025-09-05T23:59:00Z",
+      "status": "unpaid",
+      "createdAt": "2025-08-25T09:45:00Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "301",
+      "title": "Grocery Shopping",
+      "description": "Buy food for the week",
+      "createdBy": "3",
+      "participants": ["1", "2", "3"],
+      "startTime": "2025-08-27T16:00:00Z",
+      "endTime": "2025-08-27T17:00:00Z",
+      "relatedType": "chore",
+      "relatedId": "101"
+    },
+    {
+      "id": "302",
+      "title": "House Dinner",
+      "description": "Shared meal at 8pm",
+      "createdBy": "4",
+      "participants": ["1", "2", "3", "4"],
+      "startTime": "2025-08-29T20:00:00Z",
+      "endTime": "2025-08-29T22:00:00Z",
+      "relatedType": "general",
+      "relatedId": null
+    }
+  ],
+  "notifications": [
+    {
+      "id": "401",
+      "type": "reminder",
+      "message": "Chore 'Wash dishes' is due today",
+      "userId": "1",
+      "relatedType": "chore",
+      "relatedId": "101",
+      "status": "unread",
+      "createdAt": "2025-08-28T08:00:00Z",
+      "triggerEvent": "chore:due"
+    },
+    {
+      "id": "402",
+      "type": "info",
+      "message": "Electricity Bill added by Praxcedes",
+      "userId": "2",
+      "relatedType": "bill",
+      "relatedId": "201",
+      "status": "unread",
+      "createdAt": "2025-08-25T11:00:00Z"
+    }
+  ],
+  "groceries": [
+    {
+      "id": "501",
+      "name": "Milk",
+      "quantity": "2 liters",
+      "purchased": false,
+      "addedBy": "1"
+    },
+    {
+      "id": "502",
+      "name": "Bread",
+      "quantity": "1 loaf",
+      "purchased": true,
+      "addedBy": "2"
+    },
+    {
+      "id": "503",
+      "name": "Eggs",
+      "quantity": "12 pcs",
+      "purchased": false,
+      "addedBy": "3"
+    },
+    {
+      "id": "504",
+      "name": "Bacon",
+      "quantity": "3kg",
+      "purchased": true,
+      "addedBy": "1"
+    }
+  ],
+  "chores": [
+    {
+      "id": "1",
+      "title": "Clean the living room",
+      "assignedTo": "1",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-30T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "2",
+      "title": "Pay electricity bill",
+      "assignedTo": "2",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-29T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "3",
+      "title": "Buy groceries for dinner",
+      "assignedTo": "1",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-31T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "4",
+      "title": "Take out trash",
+      "assignedTo": "3",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-28T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "5",
+      "title": "Water the plants",
+      "assignedTo": "4",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-28T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "6",
+      "title": "Clean kitchen counters",
+      "assignedTo": "1",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-29T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "7",
+      "title": "Vacuum bedrooms",
+      "assignedTo": "2",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-30T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "8",
+      "title": "Mop bathroom floors",
+      "assignedTo": "3",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-27T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "9",
+      "title": "Check mailbox",
+      "assignedTo": "4",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-28T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "10",
+      "title": "Organize pantry",
+      "assignedTo": "1",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-31T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "11",
+      "title": "Sweep hallway",
+      "assignedTo": "2",
+      "completed": true,
+      "status": "Done",
+      "dueDate": "2025-08-29T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "12",
+      "title": "Clean windows",
+      "assignedTo": "3",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-30T00:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "101",
+      "title": "Wash dishes",
+      "assignedTo": "1",
+      "completed": false,
+      "status": "Pending",
+      "dueDate": "2025-08-28T18:00:00Z",
+      "createdAt": "2025-08-25T09:30:00Z"
+    },
+    {
+      "id": "102",
+      "title": "Vacuum living room",
+      "assignedTo": "2",
+      "completed": false,
+      "status": "In-Progress",
+      "dueDate": "2025-08-27T14:00:00Z",
+      "createdAt": "2025-08-24T11:00:00Z"
+    }
+  ]
+}

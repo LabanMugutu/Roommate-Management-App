@@ -1,0 +1,175 @@
+/* ===================== Theme (Instagram Palette) ===================== */
+:root {
+  --insta-gradient: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  --insta-pink: #d62976;
+  --insta-orange: #fa7e1e;
+  --insta-purple: #962fbf;
+  --insta-blue: #4f5bd5;
+  --insta-yellow: #feda75;
+  --text-dark: #333;
+  --text-light: #fff;
+  --bg-light: #fafafa;
+  --bg-dark: #111;
+}
+
+/* ===================== Global ===================== */
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-container {
+  padding: 2rem;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  background: var(--insta-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+/* ===================== Navbar ===================== */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--insta-gradient);
+  padding: 0.75rem 1.5rem;
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+.navbar a {
+  color: var(--text-light);
+  margin-left: 1rem;
+}
+
+/* ===================== Sidebar ===================== */
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+  background: var(--insta-purple);
+  color: var(--text-light);
+  padding: 1rem;
+}
+
+.sidebar a {
+  display: block;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
+  color: var(--text-light);
+  transition: background 0.3s ease;
+}
+
+.sidebar a:hover {
+  background: var(--insta-orange);
+}
+
+/* ===================== Dashboard Cards ===================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-card {
+  background: var(--text-light);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  border: 2px solid transparent;
+  background-image: var(--insta-gradient);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  color: var(--text-dark);
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* ===================== Chores ===================== */
+.chore-form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.chore-form input,
+.chore-form select {
+  padding: 0.5rem;
+  border: 1px solid var(--insta-purple);
+  border-radius: 8px;
+  outline: none;
+  flex: 1;
+}
+
+.chore-form button {
+  background: var(--insta-gradient);
+  color: var(--text-light);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.chore-form button:hover {
+  opacity: 0.9;
+}
+
+.chore-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chore-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--text-light);
+  border: 1px solid var(--insta-orange);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.chore-item:hover {
+  transform: translateY(-2px);
+}
+
+.chore-completed {
+  text-decoration: line-through;
+  color: var(--insta-purple);
+  opacity: 0.7;
+}
+
+.chore-item button {
+  background: var(--insta-gradient);
+  border: none;
+  color: var(--text-light);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.chore-item button:hover {
+  opacity: 0.85;
+}

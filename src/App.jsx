@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthStore } from "./Stores/useAuthStore";
 
-function App() {
-  const [count, setCount] = useState(0)
+// Components
+import Navbar from "./Components/Navbar";
+import Sidebar from "./Components/Sidebar";
+
+// Pages
+import Dashboard from "./Pages/Dashboard";
+import Chores from "./Pages/Chores";
+import GroceryPage from "./Pages/GroceryPage";
+import Login from "./Pages/Login";
+
+export default function App() {
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="app-container">
+        {isAuthenticated && <Navbar />}
+        <div className="app-body">
+          {isAuthenticated && <Sidebar />}
+          <div className="main-content">
+            <Routes>
+              {/* Public */}
+              <Route path="/login" element={<Login />} />
+
+              {/* Protected */}
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/chores"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Chores />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/grocery"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <GroceryPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Root */}
+              <Route
+                path="/"
+                element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />}
+              />
+
+              {/* Catch-all */}
+              <Route
+                path="*"
+                element={<Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />}
+              />
+            </Routes>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+function ProtectedRoute({ isAuthenticated, children }) {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
