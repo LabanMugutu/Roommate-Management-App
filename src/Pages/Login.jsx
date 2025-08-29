@@ -13,8 +13,8 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email); // store handles setting user & error
-      setEmail("");       // optional: clear input on success
+      await login(email);
+      setEmail("");      
     } catch (err) {
       console.error("Login failed:", err.message);
     }
