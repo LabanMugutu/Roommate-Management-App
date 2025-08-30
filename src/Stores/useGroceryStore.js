@@ -1,86 +1,71 @@
-// src/Stores/useGroceryStore.js
+// Stores/useGroceryStore.js
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { devtools } from "zustand/middleware";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 export const useGroceryStore = create(
-  devtools(
-    persist(
-      (set, get) => ({
-        groceries: [],
-        loading: false,
-        error: null,
+  devtools((set, get) => ({
+    groceries: [],
+    loading: false,
+    error: null,
 
-        // load groceries from backend
-        fetchGroceries: async () => {
-          set({ loading: true, error: null });
-          try {
-            const res = await fetch(`${API_URL}/groceries`);
-            if (!res.ok) throw new Error("Failed to fetch groceries");
-            const data = await res.json();
-            set({ groceries: Array.isArray(data) ? data : [], loading: false });
-          } catch (err) {
-            set({ error: err.message || "Unknown error", loading: false });
-          }
-        },
+    fetchGroceries: async () => {
+      set({ loading: true, error: null });
+      try {
+        const res = await fetch(`${API_URL}/groceries`);
+        if (!res.ok) throw new Error("Failed to fetch groceries");
+        const data = await res.json();
+        set({ groceries: data.groceries || [], loading: false });
+      } catch (err) {
+        set({ error: err.message, loading: false });
+      }
+    },
 
-        // add grocery (POST) — backend assigns id
-        addGrocery: async (item) => {
-          try {
-            const res = await fetch(`${API_URL}/groceries`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(item),
-            });
-            if (!res.ok) throw new Error("Failed to add grocery");
-            const newItem = await res.json();
-            set({ groceries: [...get().groceries, newItem] });
-          } catch (err) {
-            set({ error: err.message || "Failed to add grocery" });
-          }
-        },
+    addGrocery: async (g) => {
+      try {
+        const res = await fetch(`${API_URL}/groceries`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(g),
+        });
+        if (!res.ok) throw new Error("Failed to add grocery");
+        const data = await res.json();
+        set({ groceries: [...get().groceries, data] });
+      } catch (err) {
+        set({ error: err.message });
+      }
+    },
 
-        // toggle purchased (PATCH)
-        toggleGrocery: async (id) => {
-          try {
-            const grocery = get().groceries.find((g) => String(g.id) === String(id));
-            if (!grocery) return;
-            const updated = { ...grocery, purchased: !grocery.purchased };
+    toggleGrocery: async (id) => {
+      try {
+        const grocery = get().groceries.find((g) => g.id === id);
+        if (!grocery) throw new Error("Grocery not found");
 
-            const res = await fetch(`${API_URL}/groceries/${id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ purchased: updated.purchased }),
-            });
-            if (!res.ok) throw new Error("Failed to update grocery");
-            const returned = await res.json();
+        const updated = { ...grocery, purchased: !grocery.purchased };
+        const res = await fetch(`${API_URL}/groceries/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updated),
+        });
+        if (!res.ok) throw new Error("Failed to update grocery");
 
-            set({
-              groceries: get().groceries.map((g) =>
-                String(g.id) === String(id) ? returned : g
-              ),
-            });
-          } catch (err) {
-            set({ error: err.message || "Failed to toggle grocery" });
-          }
-        },
+        set({
+          groceries: get().groceries.map((g) => (g.id === id ? updated : g)),
+        });
+      } catch (err) {
+        set({ error: err.message });
+      }
+    },
 
-        // delete grocery (DELETE)
-        deleteGrocery: async (id) => {
-          try {
-            const res = await fetch(`${API_URL}/groceries/${id}`, { method: "DELETE" });
-            if (!res.ok) throw new Error("Failed to delete grocery");
-            set({ groceries: get().groceries.filter((g) => String(g.id) !== String(id)) });
-          } catch (err) {
-            set({ error: err.message || "Failed to delete grocery" });
-          }
-        },
-      }),
-      { name: "groceries-storage" }
-    )
-  )
+    deleteGrocery: async (id) => {
+      try {
+        const res = await fetch(`${API_URL}/groceries/${id}`, { method: "DELETE" });
+        if (!res.ok) throw new Error("Failed to delete grocery");
+        set({ groceries: get().groceries.filter((g) => g.id !== id) });
+      } catch (err) {
+        set({ error: err.message });
+      }
+    },
+  }))
 );
-
-// Auto-init once when store loads
-useGroceryStore.getState().fetchGroceries();
