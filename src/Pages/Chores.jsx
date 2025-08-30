@@ -1,14 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useChoreStore } from "../Stores/useChoreStore";
 import Card from "../Components/Card";
 import Button from "../Components/Button";
 import "../Styles/theme.css";
 
 export default function Chores() {
-  const { chores, loading, error, addChore, completeChore, deleteChore } =
-    useChoreStore();
+  const {
+    chores,
+    loading,
+    error,
+    fetchChores,
+    addChore,
+    completeChore,
+    deleteChore,
+  } = useChoreStore();
 
   const [name, setName] = useState("");
+
+  // Auto-fetch chores when component mounts
+  useEffect(() => {
+    fetchChores();
+  }, [fetchChores]);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -21,6 +33,7 @@ export default function Chores() {
     <div className="page-container">
       <h2 className="page-title">Chores</h2>
 
+      {/* Add chore form */}
       <Card className="card-form">
         <form className="form-row" onSubmit={handleAdd}>
           <input
@@ -36,9 +49,11 @@ export default function Chores() {
         </form>
       </Card>
 
+      {/* Loading and error messages */}
       {loading && <p className="info-text">Loading chores...</p>}
       {error && <p className="error-text">{error}</p>}
 
+      {/* Chores list */}
       <ul className="chore-list">
         {chores.length > 0 ? (
           chores.map((chore) => (
