@@ -1,0 +1,96 @@
+{
+  
+  "chores": [
+    {
+      "id": 1,
+      "title": "Clean kitchen",
+      "assignedTo": "Alex",
+      "dueDate": "2023-06-15",
+      "status": "complete" 
+    },
+    {
+      "id": 2,
+      "title": "Vacuum living room",
+      "assignedTo": "Jordan",
+      "dueDate": "2023-06-17",
+      "status": "pending"
+    }
+  ],
+
+  
+  "expenses": [
+    {
+      "id": 1,
+      "title": "Electricity Bill",
+      "amount": 120,
+      "dueDate": "2023-06-20",
+      "status": "unpaid", 
+      "paidBy": null 
+    },
+    {
+      "id": 2,
+      "title": "Internet Bill",
+      "amount": 60,
+      "dueDate": "2023-06-25",
+      "status": "paid",
+      "paidBy": "Sam"
+    }
+  ],
+
+  
+  "events": [
+    {
+      "id": 1,
+      "title": "Grocery shopping",
+      "date": "2023-06-15",
+      "participants": ["Alex", "Sam"]
+    },
+    {
+      "id": 2,
+      "title": "House meeting",
+      "date": "2023-06-18",
+      "participants": ["Jordan", "Sam", "Alex"]
+    }
+  ],
+
+  
+  "roommates": [
+    {
+      "id": 1,
+      "name": "Alex",
+      "email": "alex@example.com",
+      "phone": "555-1234"
+    },
+    {
+      "id": 2,
+      "name": "Jordan",
+      "email": "jordan@example.com",
+      "phone": "555-5678"
+    },
+    {
+      "id": 3,
+      "name": "Sam",
+      "email": "sam@example.com",
+      "phone": "555-8765"
+    }
+  ],
+
+  
+  "notifications": [
+    {
+      "id": 1,
+      "message": "Electricity bill due in 5 days",
+      "type": "reminder"
+    },
+    {
+      "id": 2,
+      "message": "Jordan has not completed their chore: Vacuum living room",
+      "type": "alert"
+    },
+    {
+      "id": 3,
+      "message": "Sam paid the Internet bill",
+      "type": "info"
+    }
+  ]
+}
