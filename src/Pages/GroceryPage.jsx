@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useGroceryStore } from "../Stores/useGroceryStore";
 import Card from "../Components/Card";
 import Button from "../Components/Button";
 import "../Styles/theme.css";
 
 export default function GroceryPage() {
-  const { groceries, loading, error, addGrocery, toggleGrocery, deleteGrocery } =
+  const { groceries, loading, error, addGrocery, toggleGrocery, deleteGrocery, fetchGroceries } =
     useGroceryStore();
 
   const [item, setItem] = useState("");
+
+  useEffect(() => {
+    fetchGroceries();
+  }, []);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -43,9 +47,7 @@ export default function GroceryPage() {
         {groceries.length > 0 ? (
           groceries.map((g) => (
             <Card key={g.id} className="grocery-item">
-              <span className={g.purchased ? "grocery-purchased" : ""}>
-                {g.name}
-              </span>
+              <span className={g.purchased ? "grocery-purchased" : ""}>{g.name}</span>
               <div className="grocery-actions">
                 <Button
                   onClick={() => toggleGrocery(g.id)}
@@ -53,10 +55,7 @@ export default function GroceryPage() {
                 >
                   {g.purchased ? "Purchased" : "Mark as Bought"}
                 </Button>
-                <Button
-                  onClick={() => deleteGrocery(g.id)}
-                  className="btn-red"
-                >
+                <Button onClick={() => deleteGrocery(g.id)} className="btn-red">
                   Delete
                 </Button>
               </div>
