@@ -10,14 +10,13 @@ export const useRoommateStore = create(
     loading: false,
     error: null,
 
-    initRoommates: async () => {
-      if (get().roommates.length) return;
+    fetchRoommates: async () => {
       set({ loading: true, error: null });
       try {
         const res = await fetch(`${API_URL}/roommates`);
         if (!res.ok) throw new Error("Failed to fetch roommates");
         const data = await res.json();
-        set({ roommates: data, loading: false });
+        set({ roommates: data.roommates || [], loading: false });
       } catch (err) {
         set({ error: err.message, loading: false });
       }
@@ -40,18 +39,12 @@ export const useRoommateStore = create(
 
     removeRoommate: async (id) => {
       try {
-        const res = await fetch(`${API_URL}/roommates/${id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(`${API_URL}/roommates/${id}`, { method: "DELETE" });
         if (!res.ok) throw new Error("Failed to remove roommate");
-        set({
-          roommates: get().roommates.filter((rm) => rm.id !== id),
-        });
+        set({ roommates: get().roommates.filter((rm) => rm.id !== id) });
       } catch (err) {
         set({ error: err.message });
       }
     },
   }))
 );
-
-useRoommateStore.getState().initRoommates();
