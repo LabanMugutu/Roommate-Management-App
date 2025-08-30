@@ -1,15 +1,18 @@
-// Pages/Roommates.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRoommateStore } from "../Stores/useRoommateStore";
 import Card from "../Components/Card";
 import Button from "../Components/Button";
 import "../Styles/theme.css";
 
 export default function Roommates() {
-  const { roommates, loading, error, addRoommate, removeRoommate } =
+  const { roommates, loading, error, addRoommate, removeRoommate, fetchRoommates } =
     useRoommateStore();
 
   const [name, setName] = useState("");
+
+  useEffect(() => {
+    fetchRoommates(); // auto-fetch on mount
+  }, []);
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -45,10 +48,7 @@ export default function Roommates() {
           roommates.map((rm) => (
             <Card key={rm.id} className="roommate-item">
               <span>{rm.name}</span>
-              <Button
-                onClick={() => removeRoommate(rm.id)}
-                className="btn-red"
-              >
+              <Button onClick={() => removeRoommate(rm.id)} className="btn-red">
                 Remove
               </Button>
             </Card>
