@@ -7,11 +7,11 @@ import { useRoommateStore } from "../Stores/useRoommateStore";
 import { useChoreStore } from "../Stores/useChoreStore";
 
 export default function Dashboard() {
-  // ✅ Fetch slice of state from each store
+  // Fetch state slices from stores
   const roommates = useRoommateStore((s) => s.roommates) || [];
   const chores = useChoreStore((s) => s.chores) || [];
 
-  // Calculate totals or other summary data
+  // Calculate summary
   const totalChores = chores.length;
   const completedChores = chores.filter((c) => c.completed).length;
 
