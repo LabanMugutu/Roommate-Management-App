@@ -26,16 +26,6 @@ export default function Sidebar() {
           </NavLink>
         </li>
 
-        {/* Expenses */}
-        <li className="sidebar-item">
-          <NavLink
-            to="/expenses"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Expenses
-          </NavLink>
-        </li>
-
         {/* Grocery */}
         <li className="sidebar-item">
           <NavLink
@@ -43,26 +33,6 @@ export default function Sidebar() {
             className={({ isActive }) => (isActive ? "active" : "")}
           >
             Grocery
-          </NavLink>
-        </li>
-
-        {/* Calendar */}
-        <li className="sidebar-item">
-          <NavLink
-            to="/calendar"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Calendar
-          </NavLink>
-        </li>
-
-        {/* Notifications */}
-        <li className="sidebar-item">
-          <NavLink
-            to="/notifications"
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            Notifications
           </NavLink>
         </li>
       </ul>
