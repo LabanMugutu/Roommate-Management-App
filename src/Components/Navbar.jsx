@@ -1,34 +1,33 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../Stores/useAuthStore";
 import "../Styles/theme.css";
 
 export default function Navbar() {
-  // Get user and logout function directly from store
-  const user = useAuthStore((s) => s.user);
+  const roommate = useAuthStore((s) => s.roommate); // ✅ updated
   const logout = useAuthStore((s) => s.logout);
+  const navigate = useNavigate();
 
-  const isLoggedIn = !!user;
+  const isLoggedIn = !!roommate;
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   return (
     <nav className="navbar">
-      {/* Left: App name / logo */}
       <div className="navbar-left">
-        <h1 className="app-title">My Home App</h1>
+        <h1 className="app-title">Roommate Management App</h1>
       </div>
-
-      {/* Right: User info & actions */}
       <div className="navbar-right">
         {isLoggedIn ? (
           <>
-            {user.avatar && (
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="navbar-avatar"
-              />
+            {roommate.avatar && (
+              <img src={roommate.avatar} alt={roommate.name} className="navbar-avatar" />
             )}
-            <span className="navbar-user">Welcome, {user.name}</span>
-            <button className="btn-logout" onClick={logout}>
+            <span className="navbar-user">Welcome, {roommate.name}</span>
+            <button className="btn-logout" onClick={handleLogout}>
               Logout
             </button>
           </>
