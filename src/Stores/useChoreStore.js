@@ -10,14 +10,13 @@ export const useChoreStore = create(
     loading: false,
     error: null,
 
-    initChores: async () => {
-      if (get().chores.length) return; // prevent duplicate fetch
+    fetchChores: async () => {
       set({ loading: true, error: null });
       try {
         const res = await fetch(`${API_URL}/chores`);
         if (!res.ok) throw new Error("Failed to fetch chores");
         const data = await res.json();
-        set({ chores: data, loading: false });
+        set({ chores: data.chores || [], loading: false });
       } catch (err) {
         set({ error: err.message, loading: false });
       }
@@ -40,15 +39,19 @@ export const useChoreStore = create(
 
     completeChore: async (id) => {
       try {
-        const res = await fetch(`${API_URL}/chores/${id}/complete`, {
+        const chore = get().chores.find((c) => c.id === id);
+        if (!chore) throw new Error("Chore not found");
+
+        const updated = { ...chore, completed: !chore.completed };
+        const res = await fetch(`${API_URL}/chores/${id}`, {
           method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updated),
         });
-        if (!res.ok) throw new Error("Failed to complete chore");
-        const updated = await res.json();
+        if (!res.ok) throw new Error("Failed to update chore");
+
         set({
-          chores: get().chores.map((c) =>
-            c.id === id ? updated : c
-          ),
+          chores: get().chores.map((c) => (c.id === id ? updated : c)),
         });
       } catch (err) {
         set({ error: err.message });
@@ -57,9 +60,7 @@ export const useChoreStore = create(
 
     deleteChore: async (id) => {
       try {
-        const res = await fetch(`${API_URL}/chores/${id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(`${API_URL}/chores/${id}`, { method: "DELETE" });
         if (!res.ok) throw new Error("Failed to delete chore");
         set({ chores: get().chores.filter((c) => c.id !== id) });
       } catch (err) {
@@ -68,6 +69,3 @@ export const useChoreStore = create(
     },
   }))
 );
-
-// auto-init
-useChoreStore.getState().initChores();
