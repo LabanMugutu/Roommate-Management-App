@@ -40,3 +40,84 @@
 .read-the-docs {
   color: #888;
 }
+.app-container {
+  text-align: center;
+}
+
+.app-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2563eb; /* blue */
+  margin-bottom: 20px;
+}
+
+.add-expense-form {
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.add-expense-form h2 {
+  margin-bottom: 15px;
+  font-size: 1.25rem;
+  color: #444;
+}
+
+.add-expense-form input,
+.add-expense-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.add-expense-form input:focus,
+.add-expense-form select:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+
+.add-expense-form button {
+  width: 100%;
+  padding: 12px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.add-expense-form button:hover {
+  background: #1d4ed8;
+}
+.expense-list {
+  display: grid;
+  gap: 15px;
+}
+
+.expense-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expense-card strong {
+  font-size: 1rem;
+  color: #2563eb;
+}
+
+.expense-card span {
+  font-size: 0.95rem;
+  color: #666;
+}

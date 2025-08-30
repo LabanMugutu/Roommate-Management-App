@@ -1,0 +1,17 @@
+{
+  "roommates": [
+    {
+      "id": "r1",
+      "name": "Alice"
+    },
+    {
+      "id": "r2",
+      "name": "Bob"
+    },
+    {
+      "id": "r3",
+      "name": "Charlie"
+    }
+  ],
+  "expenses": []
+}
